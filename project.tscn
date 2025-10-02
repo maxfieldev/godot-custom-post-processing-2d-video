@@ -1,9 +1,44 @@
-[gd_scene load_steps=2 format=3 uid="uid://bb1trw5kubel1"]
+[gd_scene load_steps=6 format=3 uid="uid://bb1trw5kubel1"]
 
 [ext_resource type="Texture2D" uid="uid://gs4xfut6dbjt" path="res://icon.svg" id="1_l5jy4"]
+[ext_resource type="Shader" uid="uid://cyh11j0207oyd" path="res://grayscale.gdshader" id="2_tou82"]
+[ext_resource type="Shader" uid="uid://sgyd1crdkn46" path="res://crt.gdshader" id="3_udjck"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tou82"]
+shader = ExtResource("2_tou82")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_udjck"]
+shader = ExtResource("3_udjck")
+shader_parameter/resolution = Vector2(320, 180)
+shader_parameter/scan_line_amount = 0.5
+shader_parameter/warp_amount = 0.05
+shader_parameter/vignette_amount = 0.5
+shader_parameter/vignette_intensity = 0.3
+shader_parameter/grille_amount = 0.05
+shader_parameter/brightness_boost = 1.2
 
 [node name="Project" type="Node2D"]
 
 [node name="Icon" type="Sprite2D" parent="."]
 position = Vector2(564, 313)
 texture = ExtResource("1_l5jy4")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+material = SubResource("ShaderMaterial_tou82")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer2"]
+material = SubResource("ShaderMaterial_udjck")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
